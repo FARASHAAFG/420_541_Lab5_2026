@@ -19,20 +19,12 @@ public class PlayerMovement : MonoBehaviour
     private float turnInput;            // horizontal input for rotation
     private bool isGrounded;            // true when standing on the ground
     private bool jumpRequested = false; // set in Update(), used later
-    // The methods from the next steps go here, inside the class
 
-    // Lets other scripts READ isGrounded, but not change it.
-    // "=> isGrounded" means "when asked, return isGrounded".
     public bool IsGrounded => isGrounded;
 
-
-    // Start runs once, just before the first frame
     private void Start()
     {
-        // Find the Rigidbody on this GameObject so we can move it
         rb = GetComponent<Rigidbody>();
-
-        // Freeze rotation so the player doesn't fall over when colliding
         rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
@@ -57,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
             jumpRequested = true;
         }
     }
+
     private void FixedUpdate()
     {
         MovePlayer();
@@ -82,6 +75,4 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
     }
-
-
 }
